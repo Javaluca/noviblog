@@ -1,15 +1,9 @@
-import Post from '@/app/interfaces/Post';
-import markdownToHtml from '@/app/services/markdownToHtml';
-import { getPostBySlug } from '@/app/services/post-service';
+import Post from '@/interfaces/Post';
+import markdownToHtml from '@/services/markdownToHtml';
+import { getPostBySlug } from '@/services/post-service';
 import Head from 'next/head';
 
-type Props = {
-    post: Post,
-    morePosts: Post [],
-    preview?: boolean
-  }
-
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
     const post: Post = await getPost(params);
 
     const title = `${post.title} | NoviBlog`;
@@ -29,12 +23,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
       </>
     );
   }
-  
-  type Params = {
-    params: {
-      slug: string
-    }
-  }
+
   
   async function getPost( params : { slug: string }): Promise<Post> {
     const post = getPostBySlug(params.slug, [

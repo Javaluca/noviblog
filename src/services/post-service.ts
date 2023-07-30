@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import Post from '../interfaces/Post';
 import markdownToHtml from './markdownToHtml';
 
-const postsDirectory = join(process.cwd(), 'src', '_posts');
+const postsDirectory = join(process.cwd(), 'posts');
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
@@ -41,3 +41,5 @@ export function getAllPosts(fields: string[] = []): Post[] {
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }
+
+
