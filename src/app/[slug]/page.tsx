@@ -1,10 +1,16 @@
 import Post from '@/interfaces/Post';
 import markdownToHtml from '@/services/markdownToHtml';
 import { getPostBySlug } from '@/services/post-service';
+import { notFound } from "next/navigation";
 import Head from 'next/head';
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
     const post: Post = await getPost(params);
+    if (!post) {
+      return (
+        <h2>404 Post not found</h2>
+      );
+    }
 
     const title = `${post.title} | NoviBlog`;
 
@@ -26,17 +32,23 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
   
   async function getPost( params : { slug: string }): Promise<Post> {
-    const post = getPostBySlug(params.slug, [
-      'title',
-      'date',
-      'slug',
-      'author',
-      'content',
-      'tags'
-    ]);
 
-    const content = await markdownToHtml(post.content || '');
-    post.content = content;
-  
-    return post;
+    try {
+      const post = getPostBySlug(params.slug, [
+        'title',
+        'date',
+        'slug',
+        'author',
+        'content',
+        'tags'
+      ]);
+
+      const content = await markdownToHtml(post.content || '');
+      post.content = content;
+    
+      return post;
+
+    } catch(e) {
+      return null as any;
+    }
   }
