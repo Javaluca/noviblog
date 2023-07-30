@@ -14,7 +14,7 @@ export default async function Home() {
         <>
         {
           posts?
-            posts.map(p => <PostPreview post={p} />)
+            posts.map(p => <PostPreview key={p.slug} post={p} />)
           : 'No posts'
         }
         </>

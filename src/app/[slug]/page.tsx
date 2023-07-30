@@ -24,7 +24,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                   dangerouslySetInnerHTML={{ __html: post.content }}>
           </div>
           <div className="flex flex-wrap gap-1">
-              { post.tags.map(t => <span className="badge badge-secondary badge-outline">{t}</span>)}
+              { post.tags.map(t => <span key={t} className="badge badge-secondary badge-outline">{t}</span>)}
           </div>
       </>
     );

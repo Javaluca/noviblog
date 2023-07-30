@@ -20,7 +20,7 @@ export default function PostPreview({post}: {post: Post}) {
                 </div>
                 <div className="flex justify-between">
                     <div className="flex flex-wrap gap-1">
-                        { post.tags.map(t => <span className="badge badge-secondary badge-outline">{t}</span>)}
+                        { post.tags.map(t => <span key={t} className="badge badge-secondary badge-outline">{t}</span>)}
                     </div>
 
                     <Link as={`/${post.slug}`}
