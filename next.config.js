@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    distDir: 'dist',
-    output: 'export',
+    /*distDir: 'dist',
+    output: 'export',*/
 
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
