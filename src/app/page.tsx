@@ -21,7 +21,7 @@ export default async function Home() {
   )
 }
 
-export async function getPosts(item: number = 10) {
+async function getPosts(item: number = 10): Promise<Post[]> {
   const fields: string[] = [
     'title',
     'date',

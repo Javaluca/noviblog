@@ -36,7 +36,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
     }
   }
   
-  export async function getPost( params : { slug: string }) {
+  async function getPost( params : { slug: string }): Promise<Post> {
     const post = getPostBySlug(params.slug, [
       'title',
       'date',
