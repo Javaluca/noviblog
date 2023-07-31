@@ -23,8 +23,8 @@ export default function PostPreview({post}: {post: Post}) {
                         { post.tags.map(t => <span key={t} className="badge badge-secondary badge-outline">{t}</span>)}
                     </div>
 
-                    <Link as={`/${post.slug}`}
-                            href="/[post.slug]"
+                    <Link as={`${post.slug}`}
+                            href="[post.slug]"
                             className="hover:underline">Read more →</Link>
                 </div>
             </div>
