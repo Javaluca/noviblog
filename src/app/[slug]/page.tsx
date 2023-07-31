@@ -1,6 +1,6 @@
 import Post from '@/interfaces/Post';
 import markdownToHtml from '@/services/markdownToHtml';
-import { getPostBySlug } from '@/services/post-service';
+import { getAllPosts, getPostBySlug } from '@/services/post-service';
 import { notFound } from "next/navigation";
 import Head from 'next/head';
 
@@ -52,3 +52,12 @@ export default async function PostPage({ params }: { params: { slug: string } })
       return null as any;
     }
   }
+
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts(['slug']);
+  
+  return posts.map((post) => ({
+    slug: post.slug
+  }))
+}
