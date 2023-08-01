@@ -16,3 +16,9 @@
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
+
+@media (prefers-color-scheme: dark) {
+  .markdown h1, .markdown h2, .markdown h3 {
+    color: white;
+  }
+}

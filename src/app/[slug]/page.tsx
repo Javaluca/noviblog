@@ -16,11 +16,10 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
     return (
       <>
-        <Head>
-          <title>{title}</title>
-          <meta property="og:title" content={title} key="title" />
-        </Head>
-          <div className={`prose lg:prose-xl max-w-none`}
+          <div className='text-slate-600 dark:text-slate-400'>
+            {post.author.name} | {post.date.toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric',}) }
+          </div>
+          <div className={`prose lg:prose-xl max-w-none  text-slate-900  dark:text-slate-200`}
                   dangerouslySetInnerHTML={{ __html: post.content }}>
           </div>
           <div className="flex flex-wrap gap-1">
@@ -60,4 +59,16 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug
   }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string}}) {
+
+  const post = await getPostBySlug(params.slug, ['title', 'tags', 'author']);
+
+  return {
+    title: `${post.title} | NoviBlog`,
+    description: 'Blog for coders by coders',
+    authors: { name: post.author },
+    keywords: post.tags
+  }
 }
