@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: { slug: string}}) {
   return {
     title: `${post.title} | NoviBlog`,
     description: 'Blog for coders by coders',
-    authors: { name: post.author },
+    authors: { name: post.author.name },
     keywords: post.tags
   }
 }

@@ -17,7 +17,7 @@ export default function Header() {
             <div className="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
 
                 <div className="flex w-full justify-between">
-                    <Link className=" no-underline hover:no-underline text-xl " href="/">
+                    <Link className=" no-underline hover:no-underline text-xl " href={`/`}>
                         Novi<span className="font-extrabold">Blog</span>
                     </Link>
                     <div className="tooltip tooltip-bottom" data-tip={theme == 'dark' ? 'Light mode' : 'Dark mode'}>
