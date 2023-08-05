@@ -34,7 +34,7 @@ async function getPosts(item: number = 10): Promise<Post[]> {
   const posts: Post[] = getAllPosts(fields);
 
   for (const p of posts) {
-    p.content = await markdownToHtml(p.content || '');
+    p.content = await markdownToHtml((p.content || '').substring(0, 200));
   }
 
   return posts;
