@@ -1,6 +1,4 @@
 "use client"
-import Footer from "@/components/footer";
-import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
 
 export function Themed({

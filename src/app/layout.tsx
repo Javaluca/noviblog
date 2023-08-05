@@ -1,10 +1,9 @@
+import Footer from '@/components/footer'
+import Header from '@/components/header'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Themed } from './themed'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
-import { Head, NextScript } from 'next/document'
 
 const inter = Inter({ subsets: ['latin'] })
 

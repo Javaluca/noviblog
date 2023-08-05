@@ -1,10 +1,7 @@
-import Image from 'next/image'
 import { getAllPosts } from '@/services/post-service';
 import PostPreview from '../components/post-preview';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-import markdownToHtml from '../services/markdownToHtml';
 import Post from '../interfaces/Post';
-import Link from 'next/link';
+import markdownToHtml from '../services/markdownToHtml';
 
 export default async function Home() {
 
