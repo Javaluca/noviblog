@@ -1,10 +1,8 @@
 import Post from '@/interfaces/Post';
 import markdownToHtml from '@/services/markdownToHtml';
 import { getAllPosts, getPostBySlug } from '@/services/post-service';
-import { notFound } from "next/navigation";
-import Head from 'next/head';
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: { slug: string[] } }) {
     const post: Post = await getPost(params);
     if (!post) {
       return (
@@ -30,10 +28,10 @@ export default async function PostPage({ params }: { params: { slug: string } })
   }
 
   
-  async function getPost( params : { slug: string }): Promise<Post> {
+  async function getPost( params : { slug: string[] }): Promise<Post> {
 
     try {
-      const post = getPostBySlug(params.slug, [
+      const post = getPostBySlug(params.slug.join("/"), [
         'title',
         'date',
         'slug',
@@ -57,13 +55,14 @@ export async function generateStaticParams() {
   const posts = await getAllPosts(['slug']);
   
   return posts.map((post) => ({
-    slug: post.slug
+    slug: post.slug.split("/")
   }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string}}) {
 
-  const post = await getPostBySlug(params.slug, ['title', 'tags', 'author']);
+export async function generateMetadata({ params }: { params: { slug: string[]}}) {
+
+  const post = await getPostBySlug(params.slug.join("/"), ['title', 'tags', 'author']);
 
   return {
     title: `${post.title} | NoviBlog`,

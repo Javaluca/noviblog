@@ -1,5 +1,5 @@
 ---
-title: 'FIrst post'
+title: 'Nested post'
 excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
 coverImage: '/assets/blog/preview/cover.jpg'
 date: '2023-07-30T16:03:00.000Z'
@@ -10,7 +10,7 @@ tags: [ 'spring', 'java' ]
 ogImage:
   url: '/assets/blog/preview/cover.jpg'
 ---
-# First Post
+# Nested Post
 
 ```
 const function = () => {

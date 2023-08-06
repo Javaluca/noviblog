@@ -1,13 +1,29 @@
 import fs from 'fs';
-import { join } from 'path';
+import { join, relative } from 'path';
 import matter from 'gray-matter';
 import Post from '../interfaces/Post';
 import markdownToHtml from './markdownToHtml';
 
 const postsDirectory = join(process.cwd(), 'posts');
 
+const getFilesRecursively = (directory: string) : string[] => {
+  let ret: string[] = [];
+  const filesInDirectory = fs.readdirSync(directory);
+  for (const file of filesInDirectory) {
+    const absolute = join(directory, file);
+    if (fs.statSync(absolute).isDirectory()) {
+      ret = ret.concat(getFilesRecursively(absolute));
+    } else {
+        ret.push(absolute);
+    }
+  }
+  return ret;
+};
+
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  return getFilesRecursively(postsDirectory)
+    .map(p => relative(postsDirectory, p))
+    .map(p => p.replace(/\\/g, '/'));
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []): Post {
@@ -21,7 +37,6 @@ export function getPostBySlug(slug: string, fields: string[] = []): Post {
   const ret: Post = {} as Post;
   ret.slug = realSlug;
   ret.content = content;
-  
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
@@ -38,6 +53,7 @@ export function getPostBySlug(slug: string, fields: string[] = []): Post {
 export function getAllPosts(fields: string[] = []): Post[] {
   const slugs = getPostSlugs();
   const posts: Post[] = slugs
+    .filter(slug => slug.endsWith(".md"))
     .map((slug) => {
       try {
         return getPostBySlug(slug, fields)
