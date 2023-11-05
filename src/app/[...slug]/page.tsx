@@ -13,17 +13,17 @@ export default async function PostPage({ params }: { params: { slug: string[] } 
     const title = `${post.title} | NoviBlog`;
 
     return (
-      <>
+      <div className='flex flex-col w-full'>
           <div className='text-slate-600 dark:text-slate-400'>
             {post.author.name} | {post.date.toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric',}) }
           </div>
-          <div className={`prose lg:prose-xl max-w-none  text-slate-900  dark:text-slate-200`}
+          <div className={`prose lg:prose-xl w-full  text-slate-900  dark:text-slate-200 max-w-none`}
                   dangerouslySetInnerHTML={{ __html: post.content }}>
           </div>
           <div className="flex flex-wrap gap-1">
               { post.tags.map(t => <span key={t} className="badge badge-secondary badge-outline">{t}</span>)}
           </div>
-      </>
+      </div>
     );
   }
 
